@@ -215,6 +215,8 @@ pub enum Error {
     Zint(#[from] ZintError),
     #[error("zint returned non-utf8 SVG result")]
     InvalidResultSVG(#[source] Utf8Error),
+    #[error("invalid input: {0}")]
+    InvalidInput(String),
     /// Invalid output options
     #[error("invalid input mode: {0}")]
     InvalidInputMode(ValidationFailiure),

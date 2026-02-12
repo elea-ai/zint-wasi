@@ -117,12 +117,11 @@ impl Symbol {
         self.inner
     }
 
-    pub fn encode_svg(self, data: &str, length: i32, rotate_angle: i32) -> Result<String, Error> {
-        let c_str_data = CString::new(data).expect("CString::new failed");
+    pub fn encode_svg(self, data: &[u8], length: i32, rotate_angle: i32) -> Result<String, Error> {
         let result = ZintResult::from(unsafe {
             ZBarcode_Encode_and_Print(
                 self.inner,
-                c_str_data.as_bytes_with_nul().as_ptr(),
+                data.as_ptr(),
                 length,
                 rotate_angle,
             ) as u32
